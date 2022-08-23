@@ -13,11 +13,16 @@ def embaralhadordestring(s):
 
 
 def main():
+    
     listacompalavras= ["abacate","saci", "nome","batata","causa","doenca","escola","fraude","fiscal","gato","gordo","guilhotina","helicoptero","indio","jovem"]
     
     palavraaleatoria = sorteadordepalavra(listacompalavras)
     palavraembaralhada = embaralhadordestring (palavraaleatoria)
-    print("\f ")
+
+
+    print(f"Jogo de palavra embaralhada \nA palavra sorteada foi { palavraembaralhada }")
+
 
 if __name__ == '__main__':
     main()
+
