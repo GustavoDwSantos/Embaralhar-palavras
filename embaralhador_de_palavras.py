@@ -19,12 +19,12 @@ def testador_tentativas(numero_tentativas, palavra_aleatoria, lista_com_frases_m
             print(f"Parabens, você acertou!!! \nTotal de tentativas:{tentativas}")
             break
         elif tentativas == numero_tentativas:
-            break
-        else:
-            print (sorteadordepalavra(lista_com_frases_motivacionais))
-        tentativas += 1 
-        if numero_tentativas == tentativas:
             print (f"Que pena, acabou a quantidade de tentativas!\nA palavra correta era {palavra_aleatoria}")
+        else:
+            print (f"{sorteadordepalavra(lista_com_frases_motivacionais)}\nFaltam {numero_tentativas-tentativas} tentativas!")
+            
+        tentativas += 1 
+            
 
 def main():
 
