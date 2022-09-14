@@ -1,0 +1,16 @@
+Preto 	
+Cinza 	
+Prata 	
+Branco 	
+Vermelho 	
+Bordô 	
+Púrpura 	
+Magenta 	
+Verde 	
+Lima 	
+Verde-oliva 	
+Amarelo 	
+Azul 	
+Naval 	
+Verde-azulado 	
+Ciano

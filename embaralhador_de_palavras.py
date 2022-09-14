@@ -1,5 +1,8 @@
 from random import Random
 import random
+from dificuldade import escolha_dificuldade, limitador_caracter
+from escolha_tema import escolha_tema
+
 
 
 def sorteadordepalavra(lista):
@@ -48,8 +51,12 @@ def main():
     ]
     lista_com_frases_motivacionais = ["Tente novamente", "Não foi dessa vez, não desista", "O universo é imenso, você é só um grão de areia, não desista", "Na proxima tentativa você consegue!", "foi quase"]
     numero_tentativas = 5
-    palavra_aleatoria = sorteadordepalavra(lista_com_palavras)
+    tema = escolha_tema()
+    quantidade_de_letras = escolha_dificuldade()
+    tema_delimitado = limitador_caracter(tema,quantidade_de_letras)
+    palavra_aleatoria = sorteadordepalavra(tema_delimitado)
     palavra_embaralhada = embaralhadordestring(palavra_aleatoria)
+    
     
     print(
         f"Jogo de palavra embaralhada \nA palavra sorteada foi { palavra_embaralhada }"
