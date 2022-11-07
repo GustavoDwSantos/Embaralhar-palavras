@@ -1,7 +1,7 @@
 from random import Random
 import random
 from dificuldade import escolha_dificuldade, limitador_caracter
-from escolha_tema import escolha_tema
+from tema import escolha_tema
 
 
 
@@ -29,8 +29,8 @@ def testador_tentativas(numero_tentativas, palavra_aleatoria, lista_com_frases_m
         tentativas += 1 
             
 
-def main():
-     
+def main():  
+    
     lista_com_frases_motivacionais = ["Tente novamente", "Não foi dessa vez, não desista", "O universo é imenso, você é só um grão de areia, não desista", "Na proxima tentativa você consegue!", "foi quase"]
     numero_tentativas = 5
     tema = escolha_tema()

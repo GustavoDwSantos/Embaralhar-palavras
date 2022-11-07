@@ -10,3 +10,11 @@ def escolha_tema():
         else:
             print("Valor invalido - Tente novamente")
             continue        
+
+def escolher_tema(tema):
+
+    with open (f'./Palavras/{tema}.txt') as file:
+        texto = file.read().lower()
+    return texto.split()
+
+
