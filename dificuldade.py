@@ -10,8 +10,9 @@ def escolha_dificuldade():
             continue
 
 def limitador_caracter (lista,dificuldade):
-    if dificuldade == "5":
+    if dificuldade == "5" or dificuldade == "facil":
         return [item for item in lista if len(item) <= 5]
-    elif dificuldade == "7":
+    elif dificuldade == "7" or dificuldade == "medio":
         return [item for item in lista if len(item) in (6,7)]
-    else: return [item for item in lista if len(item) >= 8]
+    elif dificuldade == "8" or dificuldade == "dificil": 
+        return [item for item in lista if len(item) >= 8]

@@ -1,9 +1,11 @@
-from logging import root
+from functools import partial
 import tkinter as tk
 from tkinter import ttk
+from tkinter.messagebox import showinfo
 from embaralhador_de_palavras import limitador_caracter, sorteadordepalavra, embaralhadordestring
 from tema import escolher_tema
 
+lista_com_frases_motivacionais = ["Tente novamente", "Não foi dessa vez, não desista", "O universo é imenso, você é só um grão de areia, não desista", "Na proxima tentativa você consegue!", "foi quase"]
 
 def window_config():
 
@@ -23,29 +25,48 @@ def window_config():
     root.geometry(f'{largura_janela}x{altura_janela}+{centro_tela_x}+{centro_tela_y}')
     return root
 
-def jogo(palavra, palavra_embaralhada):
+def jogo(palavra):
+    global root
     root = window_config()
     
     jogo_frame = ttk.Frame(root)
-    jogo_frame.pack()
+    jogo_frame.pack(padx=10, pady=10,expand=True)
 
 
-    menssagem = ttk.Label(jogo_frame, text=f"A palavra sorteada foi { palavra_embaralhada }")
+    menssagem = ttk.Label(jogo_frame, text=f"A palavra sorteada foi { embaralhadordestring(palavra) }")
+    menssagem.pack()
+
+    palavra_inserida = tk.StringVar()
+    resposta = ttk.Entry(jogo_frame, textvariable=palavra_inserida)
+    resposta.pack()
+
+    botao = ttk.Button(jogo_frame, text="Verificar",command=partial(verificar_palavra,palavra, palavra_inserida))
+    botao.pack()
 
     root.mainloop()
 
-def jogar(root):
-    print(tema)
+def jogar(dificuldade, tema):
     root.destroy()
+    lista_tema = escolher_tema(tema.get())
+    tema_limitado = limitador_caracter(lista_tema,dificuldade.get())
+    jogo(sorteadordepalavra(tema_limitado))
 
-    """lista_palavras = escolher_tema(tema)
-    tema_delimitado = limitador_caracter(lista_palavras, dificuldade)
-    palavra = sorteadordepalavra(tema_delimitado)
-    palavra_embaralhada = embaralhadordestring(palavra)
-    
-    jogo(palavra,palavra_embaralhada)
-"""
+    jogo()
+
+def verificar_palavra(palavra,palavra_inserida):
+    palavra_inserida=palavra_inserida.get()
+    if palavra == palavra_inserida:
+            showinfo(
+                title="Embaralha palavras",
+                message="Parabens! Palavra correta"
+            )
+    else: showinfo(
+        title="Embaralha Palavras",
+        message=f"{sorteadordepalavra(lista_com_frases_motivacionais)}"
+    )
+
 def caixa():
+    global root
     root = window_config()
 
     selecao_frame = ttk.Frame(root)
@@ -71,24 +92,18 @@ def caixa():
     seletor_dificuldade["values"] = ["facil", "medio","dificil"]
     seletor_dificuldade['state'] = "readonly"
     seletor_dificuldade.pack()
-    
-    global dificuldade  
-    dificuldade = seletor_dificuldade.get()
-
-    global tema
-    tema = seletor_tema.get()
 
 
-    botao_inicio = ttk.Button(selecao_frame, text="Começar Jogo", command=print(tema))
+    botao_inicio = ttk.Button(selecao_frame, text="Começar Jogo", command=partial(jogar, dificuldade_selecionada, tema_selecionado))
     botao_inicio.pack()
-    root.mainloop()
 
 
-def get_tema(root):
+def get_tema():
     root.destroy()
     caixa()
     
 def frame_inicial():
+    global root
     root = window_config()
 
     inicial_frame = ttk.Frame(root)
@@ -99,7 +114,7 @@ def frame_inicial():
     message.pack()
 
 
-    botao_inicio = ttk.Button(inicial_frame, text="Iniciar", command=lambda: get_tema(root) )
+    botao_inicio = ttk.Button(inicial_frame, text="Iniciar", command=get_tema )
     botao_inicio.pack(fill='x', expand=True, pady= 10)
 
     root.mainloop()
