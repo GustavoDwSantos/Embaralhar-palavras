@@ -43,6 +43,9 @@ def jogo(palavra):
     botao = ttk.Button(jogo_frame, text="Verificar",command=partial(verificar_palavra,palavra, palavra_inserida))
     botao.pack()
 
+    botao_retry = ttk.Button(jogo_frame, text="tentar novamente",command=get_tema)
+    botao_retry.pack()
+
     root.mainloop()
 
 def jogar(dificuldade, tema):
@@ -97,10 +100,17 @@ def caixa():
     botao_inicio = ttk.Button(selecao_frame, text="Começar Jogo", command=partial(jogar, dificuldade_selecionada, tema_selecionado))
     botao_inicio.pack()
 
+    botao_voltar = tk.Button(selecao_frame, text="Voltar", command=partial(get_menu))
+    botao_voltar.pack()
+
 
 def get_tema():
     root.destroy()
     caixa()
+
+def get_menu():
+    root.destroy()
+    frame_inicial()
     
 def frame_inicial():
     global root
